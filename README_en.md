@@ -21,7 +21,6 @@ A modern, feature-rich Astro theme designed for personal blogs and content creat
 - **💬 Comments System** - Integrated Waline comment system
 - **📊 Blog Statistics** - Track your writing statistics over time
 - **🏷️ Tags & Categories** - Organize content with tags and academic categories
-- **🔗 Friend Links** - Showcase and manage friend links
 - **📱 Responsive Design** - Fully responsive across all devices
 - **🌐 Multi-language Support** - Support for both Chinese and English
 - **📱 Social Sharing** - Share articles on Weibo, X, and Bluesky
@@ -172,7 +171,6 @@ Your content here...
 - **Articles** - Main blog posts (`/article`)
 - **Academic** - Academic content (`/academic`)
 - **Projects** - Project showcase (`/projects`)
-- **Links** - Friend links management (`/links`)
 - **About** - About page (`/about`)
 
 ---

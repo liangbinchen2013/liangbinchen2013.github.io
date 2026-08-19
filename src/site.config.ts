@@ -46,7 +46,6 @@ export const theme: ThemeUserConfig = {
       { title: '文章', titleEn: 'Articles', link: '/article' },
       { title: '学术', titleEn: 'Academic', link: '/academic' },
       { title: '项目', titleEn: 'Projects', link: '/projects' },
-      { title: '友链', titleEn: 'Links', link: '/links' },
       { title: '关于', titleEn: 'About', link: '/about' }
     ]
   },
@@ -91,23 +90,11 @@ export const theme: ThemeUserConfig = {
       main: 'blog.lbcoj.top',
       githubPages: 'blog.lbcoj.top',
       // cloudflare: '',
-      // friendCircle: '',
     },
   }
 }
 
 export const integ: IntegrationUserConfig = {
-  links: {
-    logbook: [
-    ],
-    // Yourself link info
-    applyTip: [
-      { name: 'Name', val: theme.title },
-      { name: 'Desc', val: theme.description || 'Null' },
-      { name: 'Link', val: `https://${theme.personal?.domains?.main || 'example.com'}` },
-      { name: 'Avatar', val: `https://${theme.personal?.domains?.main || 'example.com'}/avatar/avatar.png` }
-    ]
-  },
   // Enable page search function
   pagefind: true,
   // Add a random quote to the footer (default on homepage footer)
