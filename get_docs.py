@@ -198,13 +198,34 @@ def cmd_add_doc(md_path):
         die(f"目录已存在: {post_dir}")
 
     today = datetime.date.today().isoformat()
+    date_prompt = input(f"发布日期(直接回车使用今天 {today}): ").strip()
+    if date_prompt:
+        try:
+            datetime.date.fromisoformat(date_prompt)
+            publish_date = date_prompt
+        except ValueError:
+            die(f"日期格式无效: {date_prompt}(请使用 YYYY-MM-DD 格式)")
+    else:
+        publish_date = today
+
+    update_prompt = input(f"更新日期(可选,回车跳过): ").strip()
+    if update_prompt:
+        try:
+            datetime.date.fromisoformat(update_prompt)
+            updated_date = update_prompt
+        except ValueError:
+            die(f"日期格式无效: {update_prompt}(请使用 YYYY-MM-DD 格式)")
+    else:
+        updated_date = ""
+
     tags_yaml = "[" + ", ".join(tags) + "]" if tags else "[]"
     frontmatter = (
         "---\n"
         f"title: \"{title}\"\n"
         f"description: \"{description}\"\n"
-        f"publishDate: {today}\n"
-        f"tags: {tags_yaml}\n"
+        f"publishDate: {publish_date}\n"
+        + (f"updatedDate: {updated_date}\n" if updated_date else "")
+        + f"tags: {tags_yaml}\n"
         f"category: \"{category}\"\n"
         "draft: false\n"
         "---\n\n"
