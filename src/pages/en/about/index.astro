@@ -1,0 +1,69 @@
+---
+import PageLayout from '@/layouts/CommonPage.astro'
+import ToolSection from '@/components/about/ToolSection.astro'
+import { Comment } from '@/components/advanced'
+import { Spoiler } from '@/components/user'
+
+const headings = [
+  { depth: 2, slug: 'tools', text: 'Tools' },
+  { depth: 2, slug: 'copyright', text: 'Copyright' },
+  { depth: 2, slug: 'theme', text: 'Theme' }
+]
+---
+
+<PageLayout title='About' {headings} info='/about'>
+  <p>Hello, welcome to my blog! This is where I record my learning, life, and thoughts.</p>
+  <p>My motto: <Spoiler>Experience personally, practice for life.</Spoiler></p>
+  <h2 id='tools'>Tools<a class='anchor' href='#tools'>#</a></h2>
+  <ToolSection
+    class='mb-5'
+    title='Productivity'
+    tools={[
+      {
+        name: 'VS Code',
+        description: 'Code Editor',
+        href: 'https://code.visualstudio.com/',
+        icon: import('@/assets/tools/vscode.svg?raw')
+      },
+      {
+        name: 'Deepseek',
+        description: 'AI-powered Code Generator',
+        href: 'https://www.deepseek.com',
+        icon: import('@/assets/tools/deepseek.svg?raw')
+      },
+      {
+        name: 'Edge',
+        description: 'Web Browser',
+        href: 'https://explore.microsoft.com/zh-cn/edge',
+        icon: import('@/assets/tools/edge.svg?raw')
+      },
+      {
+        name: 'Ubuntu',
+        description: 'Linux Distribution',
+        href: 'https://ubuntu.com',
+        icon: import('@/assets/tools/ubuntu.svg?raw')
+      }
+    ]}
+  />
+  <h2 id='copyright'>Copyright<a class='anchor' href='#copyright'>#</a></h2>
+  <p>
+    As you can see, all original content and the overall design of this site, unless otherwise noted, are licensed under the <a
+      href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>CC BY-NC-SA 4.0</a
+    > license. This means you are free to share and adapt the content within the scope of the license, but you must give appropriate credit, provide a link to the license, and indicate if changes were made. You may not use the material for commercial purposes.
+  </p>
+  <p>
+    Some images, trademarks, logos, and related intellectual property used on this site, including cover images, are sourced from the internet. Whether or not marked with © or ™, they belong to their respective rights holders. We do not intend to infringe on their works, trademarks, or copyrights. If any content on this site infringes upon your rights, please contact me and I will remove it as soon as possible.
+  </p>
+  <h2 id='theme'>Theme<a class='anchor' href='#theme'>#</a></h2>
+  <p>
+    This theme is heavily modified based on Astro's <a
+      href='https://astro-pure.js.org/docs '>Pure</a
+    >, <a href='https://github.com/chrismwilliams/astro-theme-cactus '>Cactus</a>, and <a
+      href='https://astro-theme-resume.vercel.app/ '>Resume</a
+    > themes. The modifications include decoupling components from packages and moving them into the Astro-conventional
+    `components` directory to fully support hot reloading; redesigning the styles of many components,
+    rewriting pages such as the Tags page, and adding a Publication interface; fixing numerous bugs, such
+    as incorrect calculations in the BackToTop component; and adding support for i18n multi-language functionality.
+  </p>
+  <Comment slot='bottom' />
+</PageLayout>
