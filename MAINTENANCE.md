@@ -126,15 +126,19 @@ source ~/miniconda3/bin/activate
 
 ## 2.3 GitHub 访问代理(FastGithub)
 
-由于网络环境,访问 GitHub 必须走本机 FastGithub 代理。**需要联网的 git 操作**(push / pull / clone)前必须设置:
+网络环境不稳定时,访问 GitHub 可走本机 FastGithub 代理。`tools.py` 的 `git push`、`deploy` 命令内部会自动处理,无需手动 export:
+
+1. 先测试 GitHub **直连**,可用则不用代理;
+2. 直连失败再测试本机代理 `127.0.0.1:38457`,可用则自动设置三个代理变量;
+3. 两者都不可用时打印警告并直接重试。
+
+如需手动设置,可执行:
 
 ```bash
 export HTTPS_PROXY=http://127.0.0.1:38457
 export HTTP_PROXY=http://127.0.0.1:38457
 export ALL_PROXY=http://127.0.0.1:38457
 ```
-
-`tools.py` 的 `git push`、`deploy` 命令内部已自动设置,无需手动 export。
 
 **验证代理是否可用:**
 
@@ -2033,7 +2037,7 @@ python3 tools.py dev        # 启动开发服务器(pnpm dev)
 python3 tools.py check      # 类型检查(pnpm check)
 python3 tools.py build      # 构建(GitHub Pages 模式)
 python3 tools.py preview    # 预览构建产物
-python3 tools.py clean      # 清理 dist/.astro/.vercel
+python3 tools.py clean      # 清理 Python 编译产物与 pnpm 产物(调用 clean.py)
 ```
 
 ## 11.7 一键部署(deploy)★★★

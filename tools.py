@@ -28,7 +28,7 @@ tools.py - 博客日常管理与维护工具
   dev                             启动本地开发服务器
   check                           类型检查(astro check)
   build                           构建站点(GitHub Pages 模式)
-  clean                           清理构建产物
+  clean                           清理 Python 编译产物与 pnpm 产物
   preview                         本地预览构建结果
 
 部署:
@@ -51,6 +51,7 @@ import os
 import re
 import subprocess
 import sys
+import urllib.request
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 BLOG_DIR = os.path.join(ROOT, "src", "content", "blogs")
@@ -73,12 +74,31 @@ def conda_env():
     os.environ["PATH"] = os.path.expanduser("~/miniconda3/bin") + os.pathsep + os.environ.get("PATH", "")
 
 
+def can_connect(url, timeout=6, proxies=None):
+    try:
+        handler = urllib.request.ProxyHandler(proxies or {})
+        opener = urllib.request.build_opener(handler)
+        req = urllib.request.Request(url, method="HEAD")
+        with opener.open(req, timeout=timeout) as resp:
+            return True
+    except Exception:
+        return False
+
+
 def github_env():
-    os.environ.update({
-        "HTTPS_PROXY": "http://127.0.0.1:38457",
-        "HTTP_PROXY": "http://127.0.0.1:38457",
-        "ALL_PROXY": "http://127.0.0.1:38457",
-    })
+    proxy = "http://127.0.0.1:38457"
+    if can_connect("https://github.com"):
+        print("[网络] GitHub 直连可用,无需代理。")
+        return
+    if can_connect("https://github.com", proxies={"http": proxy, "https": proxy}):
+        print(f"[网络] 直连不可用,使用代理 {proxy}。")
+        os.environ.update({
+            "HTTPS_PROXY": proxy,
+            "HTTP_PROXY": proxy,
+            "ALL_PROXY": proxy,
+        })
+        return
+    print("[网络] 直连与代理均不可用,将直接重试(可能超时失败)。")
 
 
 def die(msg):
@@ -236,7 +256,7 @@ def cmd_build():
 
 
 def cmd_clean():
-    run("rm -rf dist .astro .vercel")
+    run(f"python3 {os.path.join(ROOT, 'clean.py')} -y")
 
 
 def cmd_preview():
