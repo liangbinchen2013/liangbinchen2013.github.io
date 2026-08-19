@@ -1,0 +1,1 @@
+import{t as e}from"./site.config.DIbroI6A.js";new Intl.DateTimeFormat(e.locale.dateLocale,e.locale.dateOptions);

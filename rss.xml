@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="/scripts/pretty-feed-v3.xsl" type="text/xsl"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:h="http://www.w3.org/TR/html4/"><channel><title>LBCの博客</title><description>LBC的个人博客，记录一堆内容。</description><link>https://blog.lbcoj.top</link><item><title>在没有 root 权限的 Ubuntu 系统下安装编程工具</title><link>https://blog.lbcoj.top/article/1</link><guid isPermaLink="true">https://blog.lbcoj.top/article/1</guid><description>在没有 root 权限的电脑上安装编程工具。</description><pubDate>Wed, 19 Aug 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;由于某些学校装的是 Ubuntu 系统（或者魔改版），还设了一个离谱密码。这导致一些同学想要学术，但是无法实现。因此，就有了这篇文章 -- 在没有 root 权限的 Ubuntu 系统下安装编程工具。&lt;/p&gt;
+&lt;h2&gt;安装python/python库&lt;/h2&gt;
+&lt;p&gt;很多学校的 python 环境十分老旧（python 3.10以下），还是阉割版（没有pip）。这就导致很多 python 项目无法正常运行。于是我们需要安装 conda 环境。&lt;/p&gt;
+&lt;h3&gt;step1 安装 conda 环境&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;Alt&lt;/code&gt; + &lt;code&gt;T&lt;/code&gt; 打开终端。&lt;/p&gt;
+&lt;p&gt;终端通常应该是这样的 : &lt;code&gt;user@JF5003:~$&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在里面输入以下命令，粘贴需要 &lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;Alt&lt;/code&gt; + &lt;code&gt;C&lt;/code&gt;。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;待进度条走完再次出现 &lt;code&gt;user@JF5003:~$&lt;/code&gt; 再次输入下列命令：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;bash Miniconda3-latest-Linux-aarch64.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装时需要按照下列步骤：&lt;/p&gt;
+&lt;p&gt;1.遇到 &lt;code&gt;Please, press ENTER to continue&lt;/code&gt; 的时候按下回车键。&lt;/p&gt;
+&lt;p&gt;2.出现 &lt;code&gt;--More--&lt;/code&gt; 的时候持续按回车键。&lt;/p&gt;
+&lt;p&gt;3.出现 &lt;code&gt;Do you accept the license terms? [yes|no]&lt;/code&gt; 的时候输入 &lt;code&gt;yes&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;4.出现 &lt;code&gt;[/home/user/miniconda3] &gt;&gt;&gt; &lt;/code&gt; 的时候按下回车键。&lt;/p&gt;
+&lt;p&gt;等到再次出现 &lt;code&gt;user@JF5003:~$&lt;/code&gt; 就说明安装成功了。&lt;/p&gt;
+&lt;h3&gt;step2 激活 conda 环境&lt;/h3&gt;
+&lt;p&gt;安装完成后，继续在终端里输入：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;~/miniconda3/bin/conda init
+source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果终端变成了 &lt;code&gt;(base) user@JF5003:~$&lt;/code&gt; 就说明环境创建成功了！&lt;/p&gt;
+&lt;p&gt;这样，python 环境就安装成功了！&lt;/p&gt;
+&lt;p&gt;在环境里面，python版本是很高的。且 &lt;code&gt;pip install&lt;/code&gt; 也可以使用了。&lt;/p&gt;
+&lt;h2&gt;安装 node.js&lt;/h2&gt;
+&lt;p&gt;有些同学会写出高端的 js 代码，这是后就需要 Node.js 进行编译。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;前置：需要同样安装 conda 环境！&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;step1 确认环境&lt;/h3&gt;
+&lt;p&gt;安装前请确认你的终端前面有 &lt;code&gt;(base)&lt;/code&gt; 字样。&lt;/p&gt;
+&lt;h3&gt;step2 安装&lt;/h3&gt;
+&lt;p&gt;1.添加频道&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;conda config --add channels conda-forge
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;2.执行安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;conda install nodejs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装时，如果有选择，请选择 &lt;code&gt;a&lt;/code&gt; (accept)。如果有 Y/N 请选择 Y。&lt;/p&gt;
+&lt;p&gt;这样，完整Node.js就安装完成了。&lt;/p&gt;
+&lt;h2&gt;安装 Git&lt;/h2&gt;
+&lt;p&gt;有些同学经常维护 Github，所以 Git 是必不可少的。然而在 Conda 环境中安装 Git 非常简单，只需要一条命令：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;conda install git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装完成后测试:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git --version
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果能看到类似 &lt;code&gt;git version 2.x.x&lt;/code&gt; 的输出版本号，说明安装成功了。&lt;/p&gt;</content:encoded><h:img src="undefined"/><enclosure url="undefined"/></item></channel></rss>
